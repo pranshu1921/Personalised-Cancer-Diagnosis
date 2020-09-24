@@ -37,6 +37,6 @@ It is important to develop a machine learning algorithm, that automatically clas
 Project Status: Finished
 
 ## Inspiration
-This case study helped in exploring and applying machine learning experience in the health informatics space.
+This case study helped in exploring and applying machine learning experience in the _**health informatics**_ space.
 ## Contact
 Feel free to contact me, send a mail to **pranshu1921@gmail.com**
