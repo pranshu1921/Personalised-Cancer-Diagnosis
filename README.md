@@ -1,6 +1,6 @@
 # Personalised-Cancer-Diagnosis
-This machine learning case study involves analyzing Memorial Sloan Kettering Cancer Center (MSKCC) data for predicting the effect of genetic variations in the cancer tumor for enabling personalised medicine.
-By given data, we classify the given genetic variations/mutations based on evidence from text-based clinical literature.
+This machine learning case study involves analyzing Memorial _**Sloan Kettering Cancer Center (MSKCC)**_ data for predicting the effect of _**genetic variations in the cancer tumors**_ for enabling personalised medicine.
+By given data, we classify the given **genetic variations/mutations** based on evidence from text-based clinical literature.
 
 ## Table of contents
 * [General info](#general-info)
