@@ -1,42 +1,125 @@
-# Personalised-Cancer-Diagnosis
-This machine learning case study involves analyzing Memorial _**Sloan Kettering Cancer Center (MSKCC)**_ data for predicting the effect of _**genetic variations in the cancer tumors**_ for enabling personalised medicine.
-By given data, we classify the given **genetic variations/mutations** based on evidence from text-based clinical literature.
+# Personalized cancer diagnosis
+## Business Problem
+### Description
 
-## Table of contents
-* [General info](#general-info)
-* [Setup](#setup)
-* [Status](#status)
-* [Inspiration](#inspiration)
-* [Contact](#contact)
+Source: https://www.kaggle.com/c/msk-redefining-cancer-treatment/
 
-## General info
+Data: Memorial Sloan Kettering Cancer Center (MSKCC)
 
-A lot has been said during the past several years about how precision medicine and, more concretely, how _**genetic testing**_ is going to disrupt the way diseases like cancer are treated.
+Download training_variants.zip and training_text.zip from Kaggle.
 
-But this is only partially happening due to the huge amount of manual work still required. **Memorial Sloan Kettering Cancer Center (MSKCC)** launched its competition on Kaggle, accepted by the **NIPS 2017 Competition Track**,  because they needed help to take personalized medicine to its full potential.
+#### Context:
 
-Once sequenced, a cancer tumor can have thousands of genetic mutations. But the challenge is distinguishing the mutations that contribute to _**tumor growth (drivers)**_ from the _**neutral mutations (passengers)**_. 
+Source: https://www.kaggle.com/c/msk-redefining-cancer-treatment/discussion/35336#198462
 
-Currently this interpretation of genetic mutations is being done manually. This is a very time-consuming task where a clinical pathologist has to manually review and classify every single genetic mutation based on evidence from text-based clinical literature.
+#### Problem statement :
 
-It is important to develop a **machine learning algorithm**, that automatically classifies genetic variations.
+Classify the given genetic variations/mutations based on evidence from text-based clinical literature.
+
+##  Machine Learning Problem Formulation
+### Data
+### Data Overview
+
+    Source: https://www.kaggle.com/c/msk-redefining-cancer-treatment/data
+    We have two data files: one conatins the information about the genetic mutations and the other contains the clinical evidence (text) that human experts/pathologists use to classify the genetic mutations.
+    Both these data files are have a common column called ID
 
 
-## Setup
+## Mapping the real-world problem to an ML problem
+### Type of Machine Learning Problem
 
-* Download the Jupyter Notebook above on your computer.
+There are nine different classes a genetic mutation can be classified into => Multi class classification problem
+###  Performance Metric
 
-### Install the requirements
- 
-* Install the requirements using `pip install -r requirements.txt`.
-    * Make sure you use Python 3.
-    
-* Run the jupyter notebook
+Source: https://www.kaggle.com/c/msk-redefining-cancer-treatment#evaluation
 
-## Status
-Project Status: Finished
+Metric(s):
 
-## Inspiration
-This case study helped in exploring and applying machine learning experience in the _**health informatics**_ space.
-## Contact
-Feel free to contact me, send a mail to **pranshu1921@gmail.com**
+    Multi class log-loss
+    Confusion matrix
+
+### Machine Learing Objectives and Constraints
+
+Objective: Predict the probability of each data-point belonging to each of the nine classes.
+
+Constraints:
+
+    Interpretability
+    Class probabilities are needed.
+    Penalize the errors in class probabilites => Metric is Log-loss.
+    No Latency constraints.
+
+##  Train, CV and Test Datasets
+
+Split the dataset randomly into three parts train, cross validation and test with 64%,16%, 20% of data respectively
+
+#  Exploratory Data Analysis
+
+##  Reading Data
+###  Reading Gene and Variation Data
+###  Reading Text Data
+###  Preprocessing of text
+
+###  Test, Train and Cross Validation Split
+####  Splitting data into train, test and cross validation (64:20:16)
+####  Distribution of y_i's in Train, Test and Cross Validation datasets
+
+## Prediction using a 'Random' Model
+
+In a 'Random' Model, we generate the NINE class probabilites randomly such that they sum to 1.
+
+## Univariate Analysis
+
+### Univariate Analysis on Gene Feature
+
+
+# Machine Learning Models
+##  Base Line Model
+### Naive Bayes
+Log Loss : 1.153235894590452
+Number of missclassified point : 0.38345864661654133
+
+##  K Nearest Neighbour Classification
+Log loss : 1.0324353214410276
+Number of mis-classified points : 0.36466165413533835
+
+###  Logistic Regression
+###  With Class balancing
+Log loss : 1.043318050124558
+Number of mis-classified points : 0.3458646616541353
+###  Without Class balancing
+Log loss : 1.062988230671672
+Number of mis-classified points : 0.3533834586466165
+##  Linear Support Vector Machines
+Log loss : 1.076836039361882
+Number of mis-classified points : 0.3458646616541353
+##  Random Forest Classifier
+### Hyper paramter tuning (With One hot Encoding)
+Log loss : 1.1978667267936522
+Number of mis-classified points : 0.39473684210526316
+###  Hyper paramter tuning (With Response Coding)
+Log loss : 1.3352069773071837
+Number of mis-classified points : 0.4943609022556391
+
+##  Stack the models
+Log loss (train) on the stacking classifier : 0.5386754023282136
+Log loss (CV) on the stacking classifier : 1.138717562146062
+Log loss (test) on the stacking classifier : 1.1742087492677697
+Number of missclassified point : 0.38646616541353385
+
+### Maximum Voting classifier
+Log loss (train) on the VotingClassifier : 0.8329702627479129
+Log loss (CV) on the VotingClassifier : 1.1887678593349613
+Log loss (test) on the VotingClassifier : 1.2061284826287209
+Number of missclassified point : 0.3849624060150376
+
+# Logistic regression with CountVectorizer Features, including both unigrams and bigrams
+Log loss : 1.1025061826224287
+Number of mis-classified points : 0.36278195488721804
+
+# adding Variation Feature,Text Feature to improve the performance
+Log loss : 0.9976654523552164
+Number of mis-classified points : 0.3233082706766917
+# Conclusion
+After some feature engineering we manage to decrease the log loss below < 1. We can adopt more feature enginnering methods and reduce the log loss furhermore.
+
